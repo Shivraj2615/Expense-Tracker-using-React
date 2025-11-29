@@ -1,18 +1,27 @@
-import { useState } from "react";
+import { useReducer } from "react";
 import AddExpenseForm from "./AddExpenseForm";
 import ExpenseList from "./ExpenseList";
 import ExpenseSummary from "./ExpenseSummary";
 
 export default function Expense() {
-  let [txns, setTxns] = useState([]);
+  let [txns, dispatch] = useReducer(transactionReducer, []);
+
+  function transactionReducer(txns, action) {
+    if (action.type === "ADD_TXN") {
+      return [...txns, action.payload];
+    } else if (action.type === "DELETE_TXN") {
+      return txns.filter((txn) => txn.id !== action.payload);
+    } else {
+      throw Error("Unknown action: " + action.type);
+    }
+  }
 
   const addTxn = (txnObj) => {
-    setTxns([...txns, txnObj]);
+    dispatch({ type: "ADD_TXN", payload: txnObj });
   };
 
   const deleteTxn = (id) => {
-    let newTxns = txns.filter((txn) => txn.id !== id);
-    setTxns(newTxns);
+    dispatch({ type: "DELETE_TXN", payload: id });
   };
 
   return (
