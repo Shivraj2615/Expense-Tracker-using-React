@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import ExpenseItem from "./ExpenseItem";
+import { TransactionContext } from "./TransactionContext";
 
-export default function ExpenseList({ txns, deleteTxn }) {
+export default function ExpenseList() {
+  const { txns, deleteTxn } = useContext(TransactionContext);
   return (
     <div className="expense-list">
       <h3>Transaction History</h3>

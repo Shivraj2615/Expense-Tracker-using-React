@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import AddExpenseForm from "./AddExpenseForm";
 import ExpenseList from "./ExpenseList";
 import ExpenseSummary from "./ExpenseSummary";
+import { TransactionContext } from "./TransactionContext";
 
 export default function Expense() {
   let [txns, dispatch] = useReducer(transactionReducer, []);
@@ -26,10 +27,12 @@ export default function Expense() {
 
   return (
     <div className="expense-tracker">
-      <h1>Expense Tracker</h1>
-      <ExpenseSummary txns={txns} />
-      <AddExpenseForm addTxn={addTxn} />
-      <ExpenseList txns={txns} deleteTxn={deleteTxn} />
+      <TransactionContext.Provider value={{ txns, addTxn, deleteTxn }}>
+        <h1>Expense Tracker</h1>
+        <ExpenseSummary />
+        <AddExpenseForm />
+        <ExpenseList />
+      </TransactionContext.Provider>
     </div>
   );
 }

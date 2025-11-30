@@ -1,24 +1,27 @@
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
+import { TransactionContext } from "./TransactionContext";
 
-export default function AddExpenseForm({ addTxn }) {
+export default function AddExpenseForm() {
+  let { addTxn } = useContext(TransactionContext);
+
   let [description, setDescription] = useState("");
-  let [amount, setAmount] = useState(0);
+  let [amount, setAmount] = useState("");
   let [expType, setExpType] = useState("Income");
   let [date, setDate] = useState("");
 
   let desInputRef = useRef(null);
   useEffect(() => {
     desInputRef.current.focus();
-  },[]);
+  }, []);
 
   const handleAddTxn = () => {
-    if (description.trim() == "") {
+    if (description.trim() === "") {
       alert("Enter Transaction Description");
       return;
     } else if (amount <= 0) {
       alert("Enter a valid Amount");
       return;
-    } else if (date == "") {
+    } else if (date === "") {
       alert("Select Valid Date");
       return;
     }
@@ -34,7 +37,7 @@ export default function AddExpenseForm({ addTxn }) {
     desInputRef.current.focus();
 
     setDescription("");
-    setAmount(0);
+    setAmount("");
     setDate("");
     setExpType("Income");
   };
