@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useCallback, useReducer } from "react";
 import AddExpenseForm from "./AddExpenseForm";
 import ExpenseList from "./ExpenseList";
 import ExpenseSummary from "./ExpenseSummary";
@@ -17,13 +17,13 @@ export default function Expense() {
     }
   }
 
-  const addTxn = (txnObj) => {
+  const addTxn = useCallback((txnObj) => {
     dispatch({ type: "ADD_TXN", payload: txnObj });
-  };
+  }, [dispatch]);
 
-  const deleteTxn = (id) => {
+  const deleteTxn = useCallback((id) => {
     dispatch({ type: "DELETE_TXN", payload: id });
-  };
+  }, [dispatch]);
 
   return (
     <div className="expense-tracker">

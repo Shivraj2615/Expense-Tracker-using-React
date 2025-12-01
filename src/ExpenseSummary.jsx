@@ -1,16 +1,22 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { TransactionContext } from "./TransactionContext";
 
 export default function ExpenseSummary() {
   const { txns } = useContext(TransactionContext);
 
-  const totalIncome = txns.reduce((sum, txn) => {
-    return txn.expType === "Income" ? sum + txn.amount : sum;
-  }, 0);
+  const totalIncome = useMemo(() => {
+    return txns.reduce(
+      (sum, txn) => (txn.expType === "Income" ? sum + txn.amount : sum),
+      0
+    );
+  }, [txns]);
 
-  const totalExpense = txns.reduce((sum, txn) => {
-    return txn.expType === "Expense" ? sum + txn.amount : sum;
-  }, 0);
+  const totalExpense = useMemo(() => {
+    return txns.reduce(
+      (sum, txn) => (txn.expType === "Expense" ? sum + txn.amount : sum),
+      0
+    );
+  }, [txns]);
 
   const balance = totalIncome - totalExpense;
 

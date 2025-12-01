@@ -1,4 +1,6 @@
-export default function ExpenseItem({ txn, deleteTxn }) {
+import { memo } from "react";
+
+function ExpenseItem({ txn, deleteTxn }) {
   return (
     <li
       style={{
@@ -20,3 +22,5 @@ export default function ExpenseItem({ txn, deleteTxn }) {
     </li>
   );
 }
+
+export default memo(ExpenseItem);
