@@ -73,27 +73,6 @@
   margin-top: 0;
 }
 
-/* ExpenseItem */
-.expense-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
-}
-
-.expense-item p {
-  margin: 0 10px 0 0;
-}
-
-.expense-item .income {
-  color: green;
-}
-
-.expense-item .expense {
-  color: red;
-}
-
 .delete-btn {
   background-color: #f44336;
   color: white;
